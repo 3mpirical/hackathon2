@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Grid, Divider } from "semantic-ui-react";
 import Iframe from "react-iframe";
+import { Link } from "react-router";
 
 class Results extends React.Component {
-
   renderVideos = () => {
     const { videos } = this.props;
     console.log(this.props);
@@ -12,8 +12,8 @@ class Results extends React.Component {
       <Card fluid key={video.id}>
         <Card.Content>
           <Iframe
-            width="450px"
-            height="450px"
+            width="100%"
+            height="100%"
             id="myId"
             title="youtube video"
             url={video.url}
@@ -24,8 +24,8 @@ class Results extends React.Component {
             allowFullScreen
           />
           <Divider />
-          <Card.Header>{video.title}</Card.Header>
-          <Card.Description>{video.description}</Card.Description>
+          <Card.Header>Title: {video.title}</Card.Header>
+          <Card.Description>Description: {video.description}</Card.Description>
         </Card.Content>
       </Card>
     ));
@@ -35,9 +35,7 @@ class Results extends React.Component {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column width="7">
-            {this.renderVideos()}
-          </Grid.Column>
+          <Grid.Column width="7">{this.renderVideos()}</Grid.Column>
         </Grid.Row>
       </Grid>
     );

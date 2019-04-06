@@ -2,6 +2,7 @@ import React from "react";
 import Search from "./Search";
 import styled from "styled-components";
 import Home from "./Home";
+import ResultsIndex from "./ResultsIndex";
 import axios from "axios";
 
 class HomeAndIndexContainer extends React.Component {
@@ -27,7 +28,11 @@ class HomeAndIndexContainer extends React.Component {
       <>
         <Container>
           <Search setSearched={this.setSearched} />
-          {!this.state.searched ? <Home videos={videos} /> : null}
+          {!this.state.searched ? (
+            <Home videos={videos} />
+          ) : (
+            <ResultsIndex videos={videos} />
+          )}
         </Container>
       </>
     );
