@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Grid, Divider } from "semantic-ui-react";
 import Iframe from "react-iframe";
-import { Link } from "react-router";
+// import { Link } from "react-router";
+import AddVideo from "./AddVideo";
 
 class Results extends React.Component {
   renderVideos = () => {
@@ -26,6 +27,7 @@ class Results extends React.Component {
           <Divider />
           <Card.Header>Title: {video.title}</Card.Header>
           <Card.Description>Description: {video.description}</Card.Description>
+          <AddVideo video={video} />
         </Card.Content>
       </Card>
     ));
