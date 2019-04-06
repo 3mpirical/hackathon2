@@ -6,7 +6,7 @@ import AddVideo from "./AddVideo";
 
 class Results extends React.Component {
   renderVideos = () => {
-    const { videos } = this.props;
+    const { videos, history } = this.props;
     console.log(this.props);
 
     return videos.map(video => (
@@ -26,10 +26,10 @@ class Results extends React.Component {
               allowFullScreen
             />
             <Divider />
-            <Link to={`/videos/${video.id}`}>
-              <Card.Header>Title: {video.title}</Card.Header>
-            </Link>
-            <Card.Description>Description: {video.description}</Card.Description>
+            <Card.Description>
+              Description: {video.description}
+            </Card.Description>
+            <AddVideo video={video} history={history} />
           </Card.Content>
         </Card>
       </Grid.Column>
@@ -38,10 +38,8 @@ class Results extends React.Component {
 
   render() {
     return (
-      <Grid centered widths='equal'>
-        <Grid.Row>
-          {this.renderVideos()}
-        </Grid.Row>
+      <Grid centered widths="equal">
+        <Grid.Row>{this.renderVideos()}</Grid.Row>
       </Grid>
     );
   }

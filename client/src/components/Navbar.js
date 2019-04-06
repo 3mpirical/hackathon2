@@ -1,7 +1,7 @@
-import React from 'react'
-import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Image } from 'semantic-ui-react'
-import { Link, withRouter, } from 'react-router-dom'
+import React from "react";
+import { AuthConsumer } from "../providers/AuthProvider";
+import { Menu, Image } from "semantic-ui-react";
+import { Link, withRouter } from "react-router-dom";
 
 class Navbar extends React.Component {
   rightNavItems = () => {
@@ -16,13 +16,23 @@ class Navbar extends React.Component {
           position="right"
           style={{ display: "flex", alignItems: "center" }}
         >
-          <Link to="/profile">
+          <Link to="/">
             <Menu.Item style={{ display: "flex", alignItems: "center" }}>
-              <Image size="normal" src={require("../images/user.png")} avatar/>
+              <Image size="normal" src={require("../images/user.png")} avatar />
               <span style={{ color: "white" }}>
                 {this.props.auth.user.name}
               </span>
             </Menu.Item>
+          </Link>
+          <Link
+            onClick={() => this.props.auth.handleLogout(this.props.history)}
+          >
+            <Menu.Item
+              id="logout"
+              style={{ color: "black" }}
+              name="logout"
+              style={{ color: "black" }}
+            />
           </Link>
         </Menu.Menu>
       );
