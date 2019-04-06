@@ -17,6 +17,7 @@ class AddVideo extends React.Component {
     axios
       .post(`/api/videos`, video)
       .then(res => {
+        this.props.history.push(`/videos/${res.data.id}`);
         console.log(res.data);
       })
       .catch(err => console.log(err));
