@@ -6,7 +6,7 @@ import AddVideo from "./AddVideo";
 
 class Results extends React.Component {
   renderVideos = () => {
-    const { videos } = this.props;
+    const { videos, history } = this.props;
     console.log(this.props);
 
     return videos.map(video => (
@@ -27,7 +27,7 @@ class Results extends React.Component {
           <Divider />
           <Card.Header>Title: {video.title}</Card.Header>
           <Card.Description>Description: {video.description}</Card.Description>
-          <AddVideo video={video} />
+          <AddVideo video={video} history={history} />
         </Card.Content>
       </Card>
     ));

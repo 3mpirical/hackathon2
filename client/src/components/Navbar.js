@@ -24,6 +24,16 @@ class Navbar extends React.Component {
               </span>
             </Menu.Item>
           </Link>
+          <Link
+            onClick={() => this.props.auth.handleLogout(this.props.history)}
+          >
+            <Menu.Item
+              id="logout"
+              style={{ color: "black" }}
+              name="logout"
+              style={{ color: "black" }}
+            />
+          </Link>
         </Menu.Menu>
       );
     } else {
