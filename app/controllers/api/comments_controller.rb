@@ -11,8 +11,12 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    comment = @video.comments.new(comment_params)
-    binding.pry
+    comment = Comment.new(
+      user_id: current_user.id,
+      video_id: @video.id,
+      author: params[:author],
+      body: params[:body],
+    )
     
     if comment.save
       render json: comment
