@@ -25,6 +25,7 @@ class Api::CommentsController < ApplicationController
       render json: @comment 
     else
       render json: @comment.errors, status: 422
+    end
   end
 
   def destroy
@@ -33,7 +34,7 @@ class Api::CommentsController < ApplicationController
 
   private 
     def set_video
-      @video = Video.find(@video[:id])
+      @video = Video.find(params[:video_id])
     end
 
     def set_comment

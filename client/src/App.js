@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import FetchUser from "./components/FetchUser";
+import VideoShow from "./components/VideoShow";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Switch, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
