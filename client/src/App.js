@@ -1,13 +1,13 @@
-import React from "react";
-import Home from "./components/Home";
-import NoMatch from "./components/NoMatch";
-import Navbar from "./components/Navbar";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import FetchUser from "./components/FetchUser";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { Switch, Route } from "react-router-dom";
-import { Container } from "semantic-ui-react";
+import React from 'react';
+import Home from './components/Home';
+import NoMatch from './components/NoMatch';
+import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Register from './components/Register';
+import FetchUser from './components/FetchUser';
+import ProtectedRoute from './components/ProtectedRoute';
+import { Switch, Route, } from 'react-router-dom';
+import { Container, } from "semantic-ui-react";
 import Video from "./Video";
 import Search from "./components/Search";
 import HomeAndIndexContainer from "./components/HomeAndIndexContainer";
@@ -21,6 +21,7 @@ const App = () => (
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/video/:id" component={Video} />
           <Route exact path="/container" component={HomeAndIndexContainer} />
           <Route component={NoMatch} />
         </Switch>
