@@ -31,7 +31,7 @@ class HomeAndIndexContainer extends React.Component {
           {!this.state.searched ? (
             <Home videos={videos} />
           ) : (
-            <ResultsIndex videos={videos} />
+            <ResultsIndex videos={videos} history={this.props.history} />
           )}
         </Container>
       </>
