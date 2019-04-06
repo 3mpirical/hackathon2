@@ -11,6 +11,8 @@ gem "bootsnap", ">= 1.1.0", require: false
 # Adds user authentication
 gem "devise_token_auth", "~> 1.0.0"
 
+gem "youtube_it"
+
 group :development, :test do
   gem "rb-readline"
   # Call 'pry' anywhere in the code to stop execution and get a debugger console
