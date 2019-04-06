@@ -27,8 +27,9 @@ class VideoShow extends React.Component {
             .catch(err => console.log(err));
     }
 
-    handleEdit = (comment) => {
-        this.setState({ author: comment.author, body: comment.body, editing: !this.state.editing })
+    handleChange = (e) => {
+        const { name, value } = e.target
+        this.setState({[name]: value})
     }
 
     handleSubmit = (e) => {
@@ -135,7 +136,7 @@ class VideoShow extends React.Component {
                                     <Icon name='trash' />
                                 </Button>
                                 <Button.Or />
-                                <Button size='tiny' color='blue' onClick={() => this.handleEdit(comment)}>
+                                <Button size='tiny' color='blue'>
                                     <Icon name='pencil' />
                                 </Button>
                             </Button.Group>
