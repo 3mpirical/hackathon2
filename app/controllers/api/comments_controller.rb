@@ -41,6 +41,6 @@ class Api::CommentsController < ApplicationController
     end
 
     def comment_params
-      params.permit(:comment).require(:author, :body)
+      params.require(:comment).permit(:author, :body)
     end
 end
