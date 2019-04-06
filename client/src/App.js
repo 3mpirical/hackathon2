@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Switch, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import Video from "./components/Video";
+import Search from "./components/Search";
+import HomeAndIndexContainer from "./components/HomeAndIndexContainer";
 
 const App = () => (
   <>
@@ -21,7 +23,8 @@ const App = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/video" component={Video} />
-          <Route exact path='/video/:id' component={VideoShow} />
+          <Route exact path="/video/:id" component={Video} />
+          <Route exact path="/container" component={HomeAndIndexContainer} />
           <Route component={NoMatch} />
         </Switch>
       </Container>
