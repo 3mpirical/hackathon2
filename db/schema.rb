@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_04_06_160317) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "url"
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
