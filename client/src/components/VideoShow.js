@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Iframe from 'react-iframe'
-import { Segment, Card, Icon, Comment, Header, Form } from 'semantic-ui-react'
+import { Segment, Card, Icon, Button, Comment, Header, Form } from 'semantic-ui-react'
 
 class VideoShow extends React.Component {
     state = {
@@ -27,9 +27,20 @@ class VideoShow extends React.Component {
         const { author, body, comments } = this.state
         axios.post(`/api/videos/${this.props.match.params.id}/comments`, { author, body })
             .then(({ data }) => {
-                this.setState({ comments: [{data}, ...comments], author: '', body: '' })
+                this.setState({ comments: [data, ...comments], author: '', body: '' })
             })
     }
+
+    deleteComment = (id) => {
+        axios.delete(`/api/videos/${this.props.match.params.id}/comments/${id}`)
+          .then(res => {
+            const comments = this.state.comments.filter(c => {
+              if (c.id !== id)
+                return c;
+            })
+            this.setState({ comments, });
+          })
+      }
 
     handleLike = (e) => {
         this.setState({ likes: this.state.likes + 1 })
@@ -110,6 +121,9 @@ class VideoShow extends React.Component {
                                     <Comment.Action>Reply</Comment.Action>
                                 </Comment.Actions>
                             </Comment.Content>
+                            <Button size='tiny' onClick={() => this.deleteComment(comment.id)}>
+                                <Icon name='trash' />
+                            </Button>
                         </Comment>
                     ))}
                 </Comment.Group>
