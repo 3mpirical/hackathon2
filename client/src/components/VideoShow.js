@@ -77,7 +77,7 @@ class VideoShow extends React.Component {
                     />
                 </Segment>
                 <Card fluid>
-                    <Card.Header textAlign='center'>Video name</Card.Header>
+                    <Card.Header textAlign='center'>{this.state.video.title}</Card.Header>
                     <Card.Header textAlign='center'>
                         <div>
                             <Icon name='thumbs up' onClick={this.handleLike} />
@@ -88,8 +88,8 @@ class VideoShow extends React.Component {
                             {this.state.dislikes}
                         </div>
                     </Card.Header>
-                    <Card.Meta textAlign='center'>Video Genre</Card.Meta>
-                    <Card.Content textAlign='center'>Video Description</Card.Content>
+                    <Card.Meta textAlign='center'>{this.state.video.genre}</Card.Meta>
+                    <Card.Content textAlign='center'>{this.state.video.description}</Card.Content>
                 </Card>
                 <Comment.Group>
                     <Header as='h3' dividing>
