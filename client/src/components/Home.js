@@ -1,8 +1,15 @@
 import React from 'react';
-import { Header, } from 'semantic-ui-react';
+import { Grid, Card, Icon, Divider } from 'semantic-ui-react';
+import Iframe from 'react-iframe'
+
 
 const Home = () => (
-  <Header as="h3" textAlign="center">Devise Auth App</Header>
+  <Grid>
+    <Grid.Row>
+      <Grid.Column width={7}>
+      </Grid.Column>
+    </Grid.Row>
+  </Grid>
 )
 
 export default Home;
