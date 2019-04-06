@@ -25,10 +25,9 @@ class VideoShow extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const { author, body, comments } = this.state
-        // CHANGE THIS 2 TO :VIDEO_ID LATER!!!!!!!!
-        axios.post('/api/videos/2/comments', { author, body })
+        axios.post(`/api/videos/${this.props.match.params.id}/comments`, { author, body })
             .then(({ data }) => {
-                this.setState({ comments: [{data}, ...comments], author: '', body })
+                this.setState({ comments: [{data}, ...comments], author: '', body: '' })
             })
     }
 
