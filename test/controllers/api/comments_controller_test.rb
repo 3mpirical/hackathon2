@@ -1,28 +1,28 @@
 require 'test_helper'
 
-class CommentsControllerTest < ActionDispatch::IntegrationTest
+class Api::CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get comments_index_url
+    get api_comments_index_url
     assert_response :success
   end
 
   test "should get show" do
-    get comments_show_url
+    get api_comments_show_url
     assert_response :success
   end
 
   test "should get new" do
-    get comments_new_url
+    get api_comments_new_url
     assert_response :success
   end
 
   test "should get edit" do
-    get comments_edit_url
+    get api_comments_edit_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get comments_destroy_url
+    get api_comments_destroy_url
     assert_response :success
   end
 
