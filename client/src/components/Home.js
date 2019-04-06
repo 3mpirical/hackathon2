@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from 'react-router-dom';
-import { Video } from "video";
-import Iframe from 'react-iframe'
-
+import { Link } from "react-router-dom";
+// import { Video } from "video";
+// import Iframe from 'react-iframe'
 
 class Home extends React.Component {
   state = {
@@ -20,8 +19,7 @@ class Home extends React.Component {
   render() {
     let { videos } = this.props;
     let topVideo;
-  
-  
+
     if (videos.length > 0) {
       topVideo = {
         id: videos[0].id,
@@ -40,7 +38,9 @@ class Home extends React.Component {
           {videos.length > 0 ? (
             <>
               <TopVideo>
-                <Link to={`/videos/${topVideo.id}`}><h3 className="video-title">{topVideo.title}</h3></Link>
+                <Link to={`/videos/${topVideo.id}`}>
+                  <h3 className="video-title">{topVideo.title}</h3>
+                </Link>
               </TopVideo>
             </>
           ) : null}
@@ -50,7 +50,9 @@ class Home extends React.Component {
             <>
               {this.state.videos.map(video => (
                 <BodyVideo key={video.id}>
-                  <Link to={`/videos/${video.id}`}><p>{video.title}</p></Link>
+                  <Link to={`/videos/${video.id}`}>
+                    <p>{video.title}</p>
+                  </Link>
                 </BodyVideo>
               ))}
             </>
@@ -87,9 +89,9 @@ const MainBody = styled.div`
 `;
 
 const BodyVideo = styled.div`
-    &:hover {
-        background-color: rgba(0,0,0,0.1);
-    }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
   .video {
     width: 100%;
     height: 100%;
