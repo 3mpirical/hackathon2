@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Grid } from 'semantic-ui-react'
+import { Grid, Segment, } from 'semantic-ui-react'
 // import { Video } from "video";
 // import Iframe from 'react-iframe'
 
@@ -47,14 +47,17 @@ class Home extends React.Component {
           ) : null}
         </MainContainer>
         <MainBody>
-          {videos.length > 4 ? (
+          {videos.length > 2 ? (
             <>
               {videos.map(video => (
-                <>
-                  <BodyVideo src={video.url} key={video.id} />
-                  <Link to={`/videos/${video.id}`}>{video.title}</Link>
+                <Segment>
+                  <BodyVideo src={video.url} key={video.id}/>
+                  <Link to={`/videos/${video.id}`}> <br /> {video.title}</Link>
+                  <br />
+                  <br />
                   <p>{video.description}</p>
-                </>
+        
+                </Segment>
               ))}
             </>
           ) : null}
@@ -84,7 +87,7 @@ const HomeContainer = styled.div`
 
 const MainBody = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   padding: 50px 0;
 `;
@@ -94,11 +97,13 @@ const BodyVideo = styled.iframe`
     background-color: rgba(0, 0, 0, 0.1);
   }
   .video {
-    width: 100%;
-    height: 100%;
-    max-height: 175px;
+    width: fixed;
+    height: fixed;
+    max-height: 200px;
   }
+
   p {
+    height: fixed;
     font-size: 12px;
     color: rgba(0, 0, 0, 0.7);
     padding: 10px;
@@ -122,7 +127,8 @@ const TopVideo = styled.iframe`
     font-weight: lighter;
   }
   .first-video {
-    width: 600px;
+    width: 800px;
+    heigth: 300px;
   }
 `;
 
