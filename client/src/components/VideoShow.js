@@ -4,27 +4,32 @@ import Iframe from 'react-iframe'
 import { Segment, Card, Icon, Button, Comment, Header, Form } from 'semantic-ui-react'
 
 class VideoShow extends React.Component {
-  state = {
-    comments: [
-      { author: "A Guy", body: "Super cool app" },
-      { author: "Another Guy", body: "Meh" },
-      { author: "Frank", body: "Love it!" }
-    ],
-    video: {},
-    likes: 220,
-    dislikes: 0,
-    author: "",
-    body: ""
-  };
+    state = {
+        comments: [
+            { author: "A Guy", body: "Super cool app" },
+            { author: "Another Guy", body: "Meh" },
+            { author: "Frank", body: "Love it!" }
+        ],
+        video: {},
+        likes: 220,
+        dislikes: 0,
+        author: "",
+        body: "",
+        editing: false
+    };
 
-  componentDidMount() {
-    axios
-      .get(`/api/videos/${this.props.match.params.id}`)
-      .then(res => {
-        this.setState({ video: res.data });
-      })
-      .catch(err => console.log(err));
-  }
+    componentDidMount() {
+        axios
+            .get(`/api/videos/${this.props.match.params.id}`)
+            .then(res => {
+                this.setState({ video: res.data });
+            })
+            .catch(err => console.log(err));
+    }
+
+    handleEdit = (comment) => {
+        this.setState({ author: comment.author, body: comment.body, editing: !this.state.editing })
+    }
 
     handleSubmit = (e) => {
         e.preventDefault()
@@ -37,14 +42,14 @@ class VideoShow extends React.Component {
 
     deleteComment = (id) => {
         axios.delete(`/api/videos/${this.props.match.params.id}/comments/${id}`)
-          .then(res => {
-            const comments = this.state.comments.filter(c => {
-              if (c.id !== id)
-                return c;
+            .then(res => {
+                const comments = this.state.comments.filter(c => {
+                    if (c.id !== id)
+                        return c;
+                })
+                this.setState({ comments, });
             })
-            this.setState({ comments, });
-          })
-      }
+    }
 
     handleLike = (e) => {
         this.setState({ likes: this.state.likes + 1 })
@@ -54,23 +59,23 @@ class VideoShow extends React.Component {
     }
 
     render() {
-    const { author, body, video } = this.state;
-    return (
-      <>
-        <Segment style={{ height: "500px" }}>
-          <Iframe
-            width="100%"
-            height="100%"
-            id="myId"
-            title="youtube video"
-            url={video.url}
-            fluid
-            className="myClassname"
-            display="initial"
-            position="relative"
-            allowFullScreen
-          />
-        </Segment>
+        const { author, body, video } = this.state;
+        return (
+            <>
+                <Segment style={{ height: "500px" }}>
+                    <Iframe
+                        width="100%"
+                        height="100%"
+                        id="myId"
+                        title="youtube video"
+                        url={video.url}
+                        fluid
+                        className="myClassname"
+                        display="initial"
+                        position="relative"
+                        allowFullScreen
+                    />
+                </Segment>
                 <Card fluid>
                     <Card.Header textAlign='center'>Video name</Card.Header>
                     <Card.Header textAlign='center'>
@@ -118,16 +123,22 @@ class VideoShow extends React.Component {
                             <Comment.Content>
                                 <Comment.Author>{comment.author}</Comment.Author>
                                 <Comment.Metadata>
-                                    <div>Today at 5:42PM</div>
+                                    <div>Today at {comment.created_at}</div>
                                 </Comment.Metadata>
                                 <Comment.Text>{comment.body}</Comment.Text>
                                 <Comment.Actions>
                                     <Comment.Action>Reply</Comment.Action>
                                 </Comment.Actions>
                             </Comment.Content>
-                            <Button size='tiny' onClick={() => this.deleteComment(comment.id)}>
-                                <Icon name='trash' />
-                            </Button>
+                            <Button.Group>
+                                <Button size='tiny' color='red' onClick={() => this.deleteComment(comment.id)}>
+                                    <Icon name='trash' />
+                                </Button>
+                                <Button.Or />
+                                <Button size='tiny' color='blue' onClick={() => this.handleEdit(comment)}>
+                                    <Icon name='pencil' />
+                                </Button>
+                            </Button.Group>
                         </Comment>
                     ))}
                 </Comment.Group>
