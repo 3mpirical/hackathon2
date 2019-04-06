@@ -1,54 +1,64 @@
-import React from 'react'
+import React from "react";
+import YTSearch from "youtube-api-search";
+import { Card, Grid, Divider } from "semantic-ui-react";
+import Iframe from "react-iframe";
 
 class Video extends React.Component {
-    state = { videos: [] }
+  state = { videos: [] };
 
-    componentDidMount() {
-        axios.get('/api/videos')
-            .then(res => {
-                this.setState({ videos: res.data })
-            })
-    }
+  componentDidMount() {
+    const API_KEY = "AIzaSyCzBCE_cIVEImQjC5DEsznG_XTgnHfmGcA";
+    YTSearch({ key: API_KEY, term: "developers" }, data => {
+      this.setState({ videos: data });
+    });
 
-    renderVideos = () => {
-        const { videos } = this.state
+    // axios.get("/api/videos").then(res => {
+    //   this.setState({ videos: res.data });
+    // });
+  }
 
-        videos.map(video => (
-            <Card fluid>
-                <Card.Content>
-                    <Iframe url={}
-                        width="450px"
-                        height="450px"
-                        id="myId"
-                        fluid
-                        className="myClassname"
-                        display="initial"
-                        position="relative"
-                        allowFullScreen />
-                    <Divider />
-                    <Card.Header>{video.name}</Card.Header>
-                    <Card.Meta>
-                        <span>{video.duration}</span>
-                    </Card.Meta>
-                    <Card.Description>{video.description}</Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                    {video.genre}
-                </Card.Content>
-            </Card>
-        ))
-    }
+  renderVideos = () => {
+    const { videos } = this.state;
+    console.log(this.state.videos);
 
-    render() {
-        return (
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={7}>
-                        {this.renderVideos}
+    return videos.map(video => (
+      <Card fluid key={video.id.videoId}>
+        <Card.Content>
+          <Iframe
+            width="450px"
+            height="450px"
+            id="myId"
+            title="youtube video"
+            url={`https://www.youtube.com/embed/${video.id.videoId}`}
+            fluid
+            className="myClassname"
+            display="initial"
+            position="relative"
+            allowFullScreen
+          />
+          <Divider />
+          <Card.Header>{video.snippet.title}</Card.Header>
+          {/* <Card.Meta>
+            <span>{video.duration}</span>
+          </Card.Meta> */}
+          <Card.Description>{video.snippet.description}</Card.Description>
+        </Card.Content>
+        {/* <Card.Content extra>{video.genre}</Card.Content> */}
+      </Card>
+    ));
+  };
 
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-        )
-    }
+  render() {
+    return (
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width="7">
+            {this.state.videos.length > 0 && this.renderVideos()}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  }
 }
+
+export default Video;
