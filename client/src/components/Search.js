@@ -15,7 +15,7 @@ class Search extends React.Component {
           title: video.snippet.title,
           description: video.snippet.description,
           url: `https://www.youtube.com/embed/${video.id.videoId}`,
-          trailer: video.snippet.thumbnails.default
+          trailer: video.snippet.thumbnails.default.url
         };
       });
       this.props.setSearched(videos);

@@ -10,12 +10,12 @@ class Home extends React.Component {
     loaded: false
   };
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    this.setState({
-      loaded: true
-    });
-  }
+  // componentDidMount() {
+  //   const { video } = this.props;
+  //   this.setState({
+  //     loaded: true
+  //   });
+  // }
 
   render() {
     let { videos } = this.props;
@@ -38,9 +38,9 @@ class Home extends React.Component {
         <MainContainer>
           {videos.length > 0 ? (
             <>
-              <TopVideo>
-                <Link to={`/videos/${topVideo.id}`}>
-                  <h3 className="video-title">{topVideo.title}</h3>
+              <TopVideo src={videos[0].url}>
+                <Link to={`/videos/${videos[0].id}`}>
+                  <h3 className="video-title">{videos[0].title}</h3>
                 </Link>
               </TopVideo>
             </>
@@ -49,12 +49,12 @@ class Home extends React.Component {
         <MainBody>
           {videos.length > 4 ? (
             <>
-              {this.state.videos.map(video => (
-                <BodyVideo key={video.id}>
-                  <Link to={`/videos/${video.id}`}>
-                    <p>{video.title}</p>
-                  </Link>
-                </BodyVideo>
+              {videos.map(video => (
+                <>
+                  <BodyVideo src={video.url} key={video.id} />
+                  <Link to={`/videos/${video.id}`}>{video.title}</Link>
+                  <p>{video.description}</p>
+                </>
               ))}
             </>
           ) : null}
@@ -89,7 +89,7 @@ const MainBody = styled.div`
   padding: 50px 0;
 `;
 
-const BodyVideo = styled.div`
+const BodyVideo = styled.iframe`
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -113,7 +113,7 @@ const MainContainer = styled.div`
   width: 100%;
 `;
 
-const TopVideo = styled.div`
+const TopVideo = styled.iframe`
   flex: 1;
   padding: 0 10px;
   .video-title {
