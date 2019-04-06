@@ -4,23 +4,27 @@ import Iframe from 'react-iframe'
 import { Segment, Card, Icon, Button, Comment, Header, Form } from 'semantic-ui-react'
 
 class VideoShow extends React.Component {
-    state = {
-        comments: [
-            { author: 'A Guy', body: 'Super cool app' },
-            { author: 'Another Guy', body: 'Meh' },
-            { author: 'Frank', body: 'Love it!' }
-        ],
-        video: {},
-        likes: 220,
-        dislikes: 0,
-        author: '',
-        body: ''
-    }
+  state = {
+    comments: [
+      { author: "A Guy", body: "Super cool app" },
+      { author: "Another Guy", body: "Meh" },
+      { author: "Frank", body: "Love it!" }
+    ],
+    video: {},
+    likes: 220,
+    dislikes: 0,
+    author: "",
+    body: ""
+  };
 
-    handleChange = (e) => {
-        const { name, value } = e.target
-        this.setState({ [name]: value })
-    }
+  componentDidMount() {
+    axios
+      .get(`/api/videos/${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({ video: res.data });
+      })
+      .catch(err => console.log(err));
+  }
 
     handleSubmit = (e) => {
         e.preventDefault()
@@ -50,23 +54,23 @@ class VideoShow extends React.Component {
     }
 
     render() {
-        const { author, body } = this.state
-        return (
-            <>
-                <Segment style={{ height: '500px' }}>
-                    <Iframe
-                        width="100%"
-                        height="100%"
-                        id="myId"
-                        title="youtube video"
-                        url='http://www.youtube.com/embed/xDMP3i36naA'
-                        fluid
-                        className="myClassname"
-                        display="initial"
-                        position="relative"
-                        allowFullScreen
-                    />
-                </Segment>
+    const { author, body, video } = this.state;
+    return (
+      <>
+        <Segment style={{ height: "500px" }}>
+          <Iframe
+            width="100%"
+            height="100%"
+            id="myId"
+            title="youtube video"
+            url={video.url}
+            fluid
+            className="myClassname"
+            display="initial"
+            position="relative"
+            allowFullScreen
+          />
+        </Segment>
                 <Card fluid>
                     <Card.Header textAlign='center'>Video name</Card.Header>
                     <Card.Header textAlign='center'>
@@ -132,4 +136,4 @@ class VideoShow extends React.Component {
     }
 }
 
-export default VideoShow
+export default VideoShow;
